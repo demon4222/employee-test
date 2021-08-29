@@ -233,7 +233,7 @@ return [
         ],
         [
             'text' => 'Positions',
-            'url'  => '#',
+            'route'  => 'positions.index',
             'icon' => 'fas fa-book',
         ],
     ],
