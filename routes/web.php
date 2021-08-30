@@ -12,6 +12,8 @@
 */
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeListController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionListController;
 
@@ -24,4 +26,7 @@ Route::middleware(['auth'])->group(function () {
 
    Route::get('/positions/list', PositionListController::class)->name('positions.list');
    Route::resource('/positions', PositionController::class)->except(['show']);
+
+   Route::get('/employees/list', EmployeeListController::class)->name('employees.list');
+   Route::resource('/employees', EmployeeController::class)->except(['show']);
 });

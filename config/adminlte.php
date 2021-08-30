@@ -228,12 +228,12 @@ return [
         // Sidebar items:
         [
             'text' => 'Employees',
-            'url'  => '#',
+            'route' => 'employees.index',
             'icon' => 'fas fa-users',
         ],
         [
             'text' => 'Positions',
-            'route'  => 'positions.index',
+            'route' => 'positions.index',
             'icon' => 'fas fa-book',
         ],
     ],
@@ -340,6 +340,41 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'Moment' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js'
+                ]
+            ]
+        ],
+        'Tempus Dominus' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css'
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js'
+                ]
+            ]
+        ],
+        'BsCustomFileInput' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
                 ],
             ],
         ],

@@ -30,35 +30,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
-
-var job_id;
-
-console.log(1);
-
-$(document).on('click', '.deleteButton', function(){
-    job_id = $(this).attr('id');
-    console.log(1);
-    $('#deleteModal').modal('show');
-});
-
-$('#ok_button').click(function(){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type:'DELETE',
-        url:"/positions/destroy/" + job_id,
-    });
-    $.ajax({
-        beforeSend:function(){
-            $('#ok_button').text('Deleting...');
-        },
-        success:function(data)
-        {
-            setTimeout(function(){
-                $('#deleteModal').modal('hide');
-                $('#positions-table').DataTable().ajax.reload();
-            }, 1000);
-        }
-    });
-});
