@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\CreateRequest;
+use App\Http\Requests\Employee\UpdateRequest;
 use App\Models\Employee\Employee;
 use App\Models\Position\Position;
 use App\Repositories\ImageRepository;
@@ -40,18 +41,27 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $positions = Position::pluck('name', 'id');
-        $heads = Employee::pluck('full_name', 'id');
+        $heads = Employee::where('id', '!=', $employee->id)
+            ->pluck('full_name', 'id');
 
         return view('employee.edit', compact('employee', 'positions', 'heads'));
     }
 
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateRequest $request, Employee $employee)
     {
-        //
+        if ($employee->head_id != $request->get('head_id')) {
+            $employee->childred()->update(['head_id' => $employee->head_id]);
+        }
+
+        $employee->update($request->validated());
+
+        return redirect(route('employees.index'));
     }
 
     public function destroy(Employee $employee)
     {
+        $employee->childred()->update(['head_id' => $employee->head_id]);
+
         $employee->delete();
     }
 }

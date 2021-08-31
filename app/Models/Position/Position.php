@@ -2,9 +2,10 @@
 
 namespace App\Models\Position;
 
+use App\Contracts\AdminLoggable;
+use App\Traits\AdminLoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Position\Position
@@ -26,9 +27,10 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Position whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-class Position extends Model
+class Position extends Model implements AdminLoggable
 {
     use HasFactory;
+    use AdminLoggableTrait;
 
     protected $fillable = ['name'];
 }

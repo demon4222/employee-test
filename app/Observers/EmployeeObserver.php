@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Contracts\AdminLoggable;
 
-class PositionObserver
+class EmployeeObserver
 {
     public function creating(AdminLoggable $model)
     {

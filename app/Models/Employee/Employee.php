@@ -2,10 +2,13 @@
 
 namespace App\Models\Employee;
 
+use App\Contracts\AdminLoggable;
 use App\Models\Image\Image;
 use App\Models\Position\Position;
+use App\Traits\AdminLoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Employee\Employee
@@ -43,9 +46,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-class Employee extends Model
+class Employee extends Model implements AdminLoggable
 {
     use HasFactory;
+    use AdminLoggableTrait;
 
     protected $fillable = [
         'full_name',
@@ -67,6 +71,16 @@ class Employee extends Model
         return $this->belongsTo(Position::class);
     }
 
+    public function childred()
+    {
+        return $this->hasMany(self::class, 'head_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'head_id');
+    }
+
     public function getAvatarPath()
     {
         return $this->avatar ? $this->avatar->path : '/images/no-image.jpg';
@@ -75,5 +89,14 @@ class Employee extends Model
     public function getPositionName()
     {
         return $this->position ? $this->position->name : 'No position';
+    }
+
+    public static function getDepth(Employee $employee, int $depth = 1)
+    {
+        if ($parent = $employee->parent) {
+            $depth = self::getDepth($parent, ++$depth);
+        }
+
+        return $depth;
     }
 }

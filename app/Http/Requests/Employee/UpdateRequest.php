@@ -8,7 +8,7 @@ use App\Rules\HeadDepthRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,7 @@ class CreateRequest extends FormRequest
             'image' => 'sometimes|file|mimes:jpg,png',
             'full_name' => 'required|string',
             'phone_number' => 'required|regex:/^\+380\(\d{2}\)\d{7}$/i',
-            'email' => 'required|unique:employees|email',
+            'email' => 'required|email|unique:employees,email,' . $this->route('employee')->id,
             'position_id' => [
                 'required',
                 'integer',
@@ -41,7 +41,7 @@ class CreateRequest extends FormRequest
             'head_id' => [
                 'bail',
                 'sometimes',
-                new HeadDepthRule(),
+                new HeadDepthRule,
             ],
             'date_of_employment' => 'required|date'
         ];

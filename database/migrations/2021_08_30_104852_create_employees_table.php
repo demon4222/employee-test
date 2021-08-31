@@ -34,8 +34,7 @@ class CreateEmployeesTable extends Migration
 
             $table->foreign('head_id')->references('id')
                 ->on('employees')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
+                ->onUpdate('cascade');
 
             $table->foreign('image_id')->references('id')
                 ->on('images')
