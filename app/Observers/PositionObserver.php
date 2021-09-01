@@ -2,17 +2,17 @@
 
 namespace App\Observers;
 
-use App\Contracts\AdminLoggable;
+use App\Models\Position\Position;
 
 class PositionObserver
 {
-    public function creating(AdminLoggable $model)
+    public function creating(Position $position)
     {
-        $model->setAuthIdCreating();
+        $position->setAuthIdCreating();
     }
 
-    public function updating(AdminLoggable $model)
+    public function updating(Position $position)
     {
-        $model->setAuthIdUpdating();
+        $position->setAuthIdUpdating();
     }
 }

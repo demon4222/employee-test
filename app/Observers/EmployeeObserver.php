@@ -2,17 +2,17 @@
 
 namespace App\Observers;
 
-use App\Contracts\AdminLoggable;
+use App\Models\Employee\Employee;
 
 class EmployeeObserver
 {
-    public function creating(AdminLoggable $model)
+    public function creating(Employee $employee)
     {
-        $model->setAuthIdCreating();
+        $employee->setAuthIdCreating();
     }
 
-    public function updating(AdminLoggable $model)
+    public function updating(Employee $employee)
     {
-        $model->setAuthIdUpdating();
+        $employee->setAuthIdUpdating();
     }
 }

@@ -2,13 +2,11 @@
 
 namespace App\Models\Employee;
 
-use App\Contracts\AdminLoggable;
 use App\Models\Image\Image;
 use App\Models\Position\Position;
 use App\Traits\AdminLoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Employee\Employee
@@ -46,7 +44,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Employee whereUpdatedBy($value)
  * @mixin \Eloquent
  */
-class Employee extends Model implements AdminLoggable
+class Employee extends Model
 {
     use HasFactory;
     use AdminLoggableTrait;
