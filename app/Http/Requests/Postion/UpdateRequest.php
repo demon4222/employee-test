@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:256|unique:positions,name,' . $this->route('position')->id
+            'name' => 'required|string|max:256|unique:positions,name,' . $this->position->id
         ];
     }
 }

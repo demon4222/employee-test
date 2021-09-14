@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             'image' => 'sometimes|file|mimes:jpg,png',
             'full_name' => 'required|string',
             'phone_number' => 'required|regex:/^\+380\(\d{2}\)\d{7}$/i',
-            'email' => 'required|email|unique:employees,email,' . $this->route('employee')->id,
+            'email' => 'required|email|unique:employees,email,' . $this->employee->id,
             'position_id' => [
                 'required',
                 'integer',
